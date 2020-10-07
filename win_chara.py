@@ -3,8 +3,12 @@ from pygame.locals import Rect, QUIT, K_LEFT, K_RIGHT, K_UP, K_DOWN
 import sys
 import os
 
-BG_FILE = "./image/bg.jpg"
-CHARA_FILE = "./image/foo.png"
+game_dir = os.path.dirname(__file__)
+img_dir = os.path.join(game_dir, "image")
+BG_FILE = "bg.jpg"
+CHARA_FILE = "foo.png"
+bg_file = os.path.join(img_dir, BG_FILE)
+char_file = os.path.join(img_dir, CHARA_FILE)
 black = (0, 0, 0)
 white = (255, 255, 255)
 blue = (0, 0, 255)
@@ -16,11 +20,11 @@ def main():
     (x, y) = (w//2, h//2)
     screen = pygame.display.set_mode((w, h))      # ウィンドウサイズ（幅, 高）の指定
     pygame.display.set_caption("Pygame Sample")   # タイトル
-    if os.path.isfile(BG_FILE):
-        bg = pygame.image.load(BG_FILE).convert() # 背景画像の指定
+    if os.path.isfile(bg_file):
+        bg = pygame.image.load(bg_file).convert() # 背景画像の指定
         rect_bg = bg.get_rect()                   # 背景画像のサイズ取得
-    if os.path.isfile(CHARA_FILE):
-        img = pygame.image.load(CHARA_FILE).convert_alpha() # キャラ画像の指定
+    if os.path.isfile(char_file):
+        img = pygame.image.load(char_file).convert_alpha() # キャラ画像の指定
         player = pygame.transform.scale(img, (73, 73))
         rect_player = player.get_rect()           # player 画像のサイズ取得
         rect_player.center = (x, y)                   # player 座標
@@ -33,9 +37,9 @@ def main():
         x = int((x * 3 + x1) // 4)
         y = int((y * 3 + y1) // 4)
         screen.fill((255, 255, 255))     # 背景色の指定（RGB）
-        if os.path.isfile(BG_FILE):
+        if os.path.isfile(bg_file):
             screen.blit(bg, rect_bg)         # 背景画像の描画
-        if os.path.isfile(CHARA_FILE):
+        if os.path.isfile(char_file):
             rect_player.center = (x, y)      # player 座標
             screen.blit(player, rect_player) # player の描画
             text = font.render(f'{x1}, {y1}', True, blue)
