@@ -20,7 +20,8 @@ def main():
         bg = pygame.image.load(BG_FILE).convert() # 背景画像の指定
         rect_bg = bg.get_rect()                   # 背景画像のサイズ取得
     if os.path.isfile(CHARA_FILE):
-        player = pygame.image.load(CHARA_FILE).convert_alpha() # キャラ画像の指定
+        img = pygame.image.load(CHARA_FILE).convert_alpha() # キャラ画像の指定
+        player = pygame.transform.scale(img, (73, 73))
         rect_player = player.get_rect()           # player 画像のサイズ取得
         rect_player.center = (x, y)                   # player 座標
         prw = rect_player.w // 2                      # player 幅の半分
